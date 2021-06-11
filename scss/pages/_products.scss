@@ -8,3 +8,11 @@
     height: 50px;
     border: solid 1px black;
 }
+#colordiv
+{
+    cursor: pointer;
+    &:hover
+    {
+        transform:scale(1.1);
+    }
+}

@@ -10748,4 +10748,11 @@ header a {
   border: solid 1px black;
 }
 
+#colordiv {
+  cursor: pointer;
+}
+#colordiv:hover {
+  transform: scale(1.1);
+}
+
 /*# sourceMappingURL=style.css.map */

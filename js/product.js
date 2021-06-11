@@ -36,10 +36,19 @@ function showTeddy(teddy) {
     dupNode.getElementById("nameTeddy").textContent= teddy.name;
     dupNode.getElementById("priceTeddy").textContent= teddy.price/100+"€";
     dupNode.getElementById("descriptionTeddy").textContent= teddy.description;
-    dupNode.getElementById("btnTeddy").href= "products.html?"+teddy._id;
+    dupNode.getElementById("btnTeddy").href= "cart.html?"+teddy._id;
     document.getElementById("productteddies").appendChild(dupNode);
     console.log(teddy.colors);
     teddy.colors.forEach((color) => {
+        if(color=="Pale brown")
+        {
+            color="#cb7e49"
+        }
+        if(color=="Dark brown")
+        {
+            color="#3f2412"
+        }
+        
         console.log(color);
     
         console.log(dupNode);
@@ -49,3 +58,4 @@ function showTeddy(teddy) {
         document.getElementById("colors").appendChild(dupColors);
     })
   }
+
