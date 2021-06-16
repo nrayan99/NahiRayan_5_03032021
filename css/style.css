@@ -10748,10 +10748,8 @@ header a {
   border: solid 1px black;
 }
 
-#colordiv {
-  cursor: pointer;
-}
 #colordiv:hover {
+  cursor: pointer;
   transform: scale(1.1);
 }
 

@@ -2,6 +2,7 @@ const idteddy= window.location.search.substring(1);
 async function init() {
     const teddies = await getTeddies();
     coverPage(teddies);
+    document.getElementById("btnTeddy").addEventListener("click",addtocart);
   }
 init();
 async function getTeddies (){
@@ -58,4 +59,14 @@ function showTeddy(teddy) {
         document.getElementById("colors").appendChild(dupColors);
     })
   }
-
+  function addtocart(){
+    if (localStorage.getItem(idteddy))
+    {
+        let nbitem= parseInt(localStorage.getItem(idteddy),10) +1
+        localStorage.setItem(idteddy,nbitem);
+    } 
+    else
+    {
+        localStorage.setItem(idteddy,1);
+    }
+}
