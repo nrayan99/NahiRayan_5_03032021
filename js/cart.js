@@ -3,7 +3,7 @@ async function init() {
     const teddies = await getTeddies();
     coverPage(teddies);
     removefromcart();
-    
+    refreshquantity();
   }
 init();
 async function getTeddies (){
@@ -41,7 +41,7 @@ function showTeddy(teddy) {
     dupNode.getElementById('cartimg').src= teddy.imageUrl;
     dupNode.getElementById("cartname").textContent= teddy.name;
     dupNode.getElementById("cartprice").textContent= teddy.price/100+"€";
-    dupNode.getElementById("cartquantity").textContent= localStorage.getItem(teddy._id);
+    dupNode.getElementById("cartquantity").value= localStorage.getItem(teddy._id);
     dupNode.getElementById("carttotal").textContent= (teddy.price/100)*parseInt(localStorage.getItem(teddy._id))+"€"
     document.getElementById("cartbody").appendChild(dupNode);
     }
@@ -56,6 +56,26 @@ function showTeddy(teddy) {
             let id_produit = localStorage.key(i);
             console.log(id_produit);
             localStorage.removeItem(id_produit);
+            location.reload();
+        })
+    }
+  }
+  function refreshquantity()
+  {
+    let quantityinput = document.querySelectorAll(".quantityinput");
+    
+    for (let i = 0 ; i< quantityinput.length ;i++)
+    {
+        quantityinput[i].addEventListener("change",function(){
+            let id_produit = localStorage.key(i);
+            if (quantityinput[i].value==0)
+            {
+                localStorage.removeItem(id_produit)
+            }
+            else
+            {
+                localStorage.setItem(id_produit,quantityinput[i].value);
+            }
             location.reload();
         })
     }
