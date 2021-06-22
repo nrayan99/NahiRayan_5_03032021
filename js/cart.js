@@ -2,6 +2,7 @@ async function init() {
 
     const teddies = await getTeddies();
     coverPage(teddies);
+    refreshfinalprice();
     removefromcart();
     refreshquantity();
   }
@@ -49,36 +50,42 @@ function showTeddy(teddy) {
   function removefromcart()
   {
     let btn_del = document.querySelectorAll(".btn-danger");
-    console.log(btn_del);
+    let cartlines = document.querySelectorAll(".cartline");
     for (let i = 0 ; i< btn_del.length ;i++)
     {
+        let id_produit = localStorage.key(i);
         btn_del[i].addEventListener("click",function(){
-            let id_produit = localStorage.key(i);
+           
             console.log(id_produit);
             localStorage.removeItem(id_produit);
-            location.reload();
+            cartlines[i].innerHTML= "";
+            refreshfinalprice();
         })
     }
   }
   function refreshquantity()
   {
     let quantityinput = document.querySelectorAll(".quantityinput");
-    
+    let cartprice = document.querySelectorAll(".prices");
+    let carttotal = document.querySelectorAll(".totalprice");
     for (let i = 0 ; i< quantityinput.length ;i++)
     {
         quantityinput[i].addEventListener("change",function(){
             let id_produit = localStorage.key(i);
-            if (quantityinput[i].value==0)
-            {
-                localStorage.removeItem(id_produit)
-            }
-            else
-            {
-                localStorage.setItem(id_produit,quantityinput[i].value);
-            }
-            location.reload();
+            localStorage.setItem(id_produit,quantityinput[i].value);
+            carttotal[i].textContent = parseInt(cartprice[i].textContent) * quantityinput[i].value+ "€" ; 
+            refreshfinalprice();
+            
         })
     }
   }
-    
-  
+  function refreshfinalprice()
+  {
+      let finalprice = 0;
+      let carttotal = document.querySelectorAll(".totalprice");
+      for (let i = 0 ; i<carttotal.length ; i++)
+      {
+          finalprice += parseInt(carttotal[i].textContent);
+      }
+      document.getElementById("finalprice").textContent = finalprice+"€";
+  }

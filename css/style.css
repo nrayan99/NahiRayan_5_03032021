@@ -10753,4 +10753,8 @@ header a {
   transform: scale(1.1);
 }
 
+.quantityinput {
+  width: 50px;
+}
+
 /*# sourceMappingURL=style.css.map */
