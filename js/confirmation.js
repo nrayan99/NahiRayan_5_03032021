@@ -1,11 +1,14 @@
 const orderid= window.location.search.substring(1);
+
 async function init() {
     const teddies = await getTeddies();
     showfinalprice(teddies)
     showorderid(orderid)
     localStorage.clear()
   }
+
 init();
+
 async function getTeddies (){
 return fetch("http://localhost:3000/api/teddies")
 .then(function(res) {
@@ -17,7 +20,6 @@ return fetch("http://localhost:3000/api/teddies")
 .catch(function(err) {
     // Une erreur est survenue
 });
-
 }
 
 async function showfinalprice(teddies)
@@ -35,6 +37,7 @@ async function showfinalprice(teddies)
     })
     document.getElementById("priceconfirmation").innerText= finalprice/100+"€";
 }
+
 async function showorderid(orderid)
 {
     document.getElementById("idconfirmation").textContent = orderid ;

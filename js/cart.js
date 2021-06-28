@@ -6,7 +6,9 @@ async function init() {
     removefromcart();
     refreshquantity();
   }
+
 init();
+
 async function getTeddies (){
 return fetch("http://localhost:3000/api/teddies")
 .then(function(res) {
@@ -18,7 +20,6 @@ return fetch("http://localhost:3000/api/teddies")
 .catch(function(err) {
     // Une erreur est survenue
 });
-
 }
 
 function coverPage(teddies) {
@@ -33,6 +34,7 @@ function coverPage(teddies) {
         })
     
 }
+
 function showTeddy(teddy) {
     const elt = document.getElementById('modelcart');
     
@@ -47,53 +49,52 @@ function showTeddy(teddy) {
     document.getElementById("cartbody").appendChild(dupNode);
     }
   }
-  function removefromcart()
-  {
-    let btn_del = document.querySelectorAll(".btn-danger");
-    let cartlines = document.querySelectorAll(".cartline");
-    for (let i = 0 ; i< btn_del.length ;i++)
-    {
+
+function removefromcart()
+{
+let btn_del = document.querySelectorAll(".btn-danger");
+let cartlines = document.querySelectorAll(".cartline");
+for (let i = 0 ; i< btn_del.length ;i++)
+{
+    let id_produit = localStorage.key(i);
+    btn_del[i].addEventListener("click",function(){
+        
+        console.log(id_produit);
+        localStorage.removeItem(id_produit);
+        cartlines[i].innerHTML= "";
+        refreshfinalprice();
+    })
+}
+}
+function refreshquantity()
+{
+let quantityinput = document.querySelectorAll(".quantityinput");
+let cartprice = document.querySelectorAll(".prices");
+let carttotal = document.querySelectorAll(".totalprice");
+for (let i = 0 ; i< quantityinput.length ;i++)
+{
+    quantityinput[i].addEventListener("change",function(){
         let id_produit = localStorage.key(i);
-        btn_del[i].addEventListener("click",function(){
-           
-            console.log(id_produit);
-            localStorage.removeItem(id_produit);
-            cartlines[i].innerHTML= "";
-            refreshfinalprice();
-        })
-    }
-  }
-  function refreshquantity()
-  {
-    let quantityinput = document.querySelectorAll(".quantityinput");
-    let cartprice = document.querySelectorAll(".prices");
+        localStorage.setItem(id_produit,quantityinput[i].value);
+        carttotal[i].textContent = parseInt(cartprice[i].textContent) * quantityinput[i].value+ "€" ; 
+        refreshfinalprice();
+        
+    })
+}
+}
+
+function refreshfinalprice()
+{
+    let finalprice = 0;
     let carttotal = document.querySelectorAll(".totalprice");
-    for (let i = 0 ; i< quantityinput.length ;i++)
+    for (let i = 0 ; i<carttotal.length ; i++)
     {
-        quantityinput[i].addEventListener("change",function(){
-            let id_produit = localStorage.key(i);
-            localStorage.setItem(id_produit,quantityinput[i].value);
-            carttotal[i].textContent = parseInt(cartprice[i].textContent) * quantityinput[i].value+ "€" ; 
-            refreshfinalprice();
-            
-        })
+        finalprice += parseInt(carttotal[i].textContent);
     }
-  }
-  function refreshfinalprice()
-  {
-      let finalprice = 0;
-      let carttotal = document.querySelectorAll(".totalprice");
-      for (let i = 0 ; i<carttotal.length ; i++)
-      {
-          finalprice += parseInt(carttotal[i].textContent);
-      }
-      document.getElementById("finalprice").textContent = finalprice+"€";
-  }
-
-
+    document.getElementById("finalprice").textContent = finalprice+"€";
+}
 
 //*********************** ENVOI FORMULAIRE 
-
 
 function createcontact()
 {
@@ -107,6 +108,7 @@ function createcontact()
     }
     return contact
 }
+
 function createproducts()
 {
 
@@ -135,6 +137,7 @@ function addressIsValid(value) {
     const regex = /^([0-9]{1,})[^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{3,}$/;
     return regex.test(value);
 }
+
 function validationform()
 {
     let formisvalid= true;
@@ -190,6 +193,7 @@ function validationform()
     }
     return formisvalid;
 }
+// Configuration de l'envoi des données lors du click sur le bouton payer
 const myForm = document.getElementById('myForm');
 myForm.addEventListener('submit', function(e) {
     e.preventDefault();

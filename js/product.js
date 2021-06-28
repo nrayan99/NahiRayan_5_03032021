@@ -4,7 +4,9 @@ async function init() {
     coverPage(teddies);
     document.getElementById("btnTeddy").addEventListener("click",addtocart);
   }
+
 init();
+
 async function getTeddies (){
 return fetch("http://localhost:3000/api/teddies")
 .then(function(res) {
@@ -16,7 +18,6 @@ return fetch("http://localhost:3000/api/teddies")
 .catch(function(err) {
     // Une erreur est survenue
 });
-
 }
 
 function coverPage(teddies) {
@@ -28,6 +29,7 @@ function coverPage(teddies) {
       }
     })
 }
+
 function showTeddy(teddy) {
     const elt = document.getElementById('productsmodel');
     
@@ -59,6 +61,7 @@ function showTeddy(teddy) {
         document.getElementById("colors").appendChild(dupColors);
     })
   }
+  
   function addtocart(){
     if (localStorage.getItem(idteddy))
     {
