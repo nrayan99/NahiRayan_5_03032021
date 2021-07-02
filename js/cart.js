@@ -9,7 +9,7 @@ async function init() {
 
 init();
 
-async function getTeddies (){
+async function getTeddies (){   
 return fetch("http://localhost:3000/api/teddies")
 .then(function(res) {
     if (res.ok) {
@@ -29,13 +29,13 @@ function coverPage(teddies) {
             if ((localStorage.key(i))==teddy._id)
             {
                 console.log(teddy);
-                showTeddy(teddy);
+                cartfiller(teddy);
             }
         })
-    
+    }
 }
 
-function showTeddy(teddy) {
+function cartfiller(teddy) {
     const elt = document.getElementById('modelcart');
     
     const dupNode = document.importNode(elt.content,true);
@@ -48,7 +48,7 @@ function showTeddy(teddy) {
     dupNode.getElementById("carttotal").textContent= (teddy.price/100)*parseInt(localStorage.getItem(teddy._id))+"€"
     document.getElementById("cartbody").appendChild(dupNode);
     }
-  }
+  
 
 function removefromcart()
 {
