@@ -3,7 +3,6 @@ async function getTeddies (){
     return fetch(URL)
     .then(function(res) {
       if (res.ok) {
-        console.log(res.json)
         return res.json();
       }
     })

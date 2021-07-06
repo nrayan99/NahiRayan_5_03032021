@@ -3,7 +3,6 @@ async function init() {
     const teddy = await getTeddy();
     showTeddy(teddy);
     addtocart()
-    console.log(URL);
   }
 
 init();
@@ -17,7 +16,6 @@ function showTeddy(teddy) {
     dupNode.getElementById("descriptionTeddy").textContent= teddy.description;
     dupNode.getElementById("btnTeddy").href= "cart.html?"+teddy._id;
     document.getElementById("productteddies").appendChild(dupNode);
-    console.log(teddy.colors);
     teddy.colors.forEach((color) => {
         const colors = document.getElementById('colorsmodel');
         const dupColors = document.importNode(colors.content,true);

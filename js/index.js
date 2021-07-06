@@ -26,7 +26,6 @@ function coverPage(teddies) {
   function addtoCart(teddies)
   {
   let btn_add = document.querySelectorAll(".AddToCartBtn");
-  console.log(btn_add)
   for (let i = 0 ; i< btn_add.length ;i++)
   {
       

@@ -40,7 +40,6 @@ for (let i = 0 ; i< btn_del.length ;i++)
     let id_produit = localStorage.key(i);
     btn_del[i].addEventListener("click",function(){
         
-        console.log(id_produit);
         localStorage.removeItem(id_produit);
         cartlines[i].innerHTML= "";
         refreshfinalprice();
