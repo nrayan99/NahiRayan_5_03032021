@@ -8,6 +8,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css" />
+    <script src="js/constante.js"></script>
+    <script src="js/teddies.js"></script>
     <script src="js/cart.js" defer ></script>
     <title>Orinoco</title>
   </head>
@@ -47,20 +49,22 @@
             <td  class="align-middle"><button id="cartremove" type="button" class="btn btn-danger">Supprimer</button></td>
           </tr>
         </template>
-        <table class="table">
-          <thead>
-            <tr>
-              <th scope="col">Produit</th>
-              <th scope="col">Nom</th>
-              <th scope="col">Prix</th>
-              <th scope="col-1">Quantité</th>          
-              <th scope="col">Prix total</th>
-              <th scope="col"></th>
-            </tr>
-          </thead>
-          <tbody id="cartbody">
-          </tbody>  
-        </table>
+        <div class="table-responsive">
+          <table class="table" >
+            <thead >
+              <tr>
+                <th scope="col">Produit</th>
+                <th scope="col">Nom</th>
+                <th scope="col">Prix</th>
+                <th scope="col">Quantité</th>          
+                <th scope="col">Prix total</th>
+                <th scope="col"></th>
+              </tr>
+            </thead>
+            <tbody id="cartbody">
+            </tbody>  
+          </table>
+      </div>
         <div class="text-center"><strong>Prix du panier : <span id="finalprice"></span></strong>  </div>
           <form class="mt-4" id="myForm">
             <div class="form-row">

@@ -8,27 +8,12 @@ async function init() {
   }
 
 init();
-
-async function getTeddies (){   
-return fetch("http://localhost:3000/api/teddies")
-.then(function(res) {
-    if (res.ok) {
-    return res.json();
-    }
-})
-.then((teddies)=>teddies)
-.catch(function(err) {
-    // Une erreur est survenue
-});
-}
-
 function coverPage(teddies) {
     for (var i = 0; i < localStorage.length; i++) {
         
         teddies.forEach((teddy) => {
             if ((localStorage.key(i))==teddy._id)
             {
-                console.log(teddy);
                 cartfiller(teddy);
             }
         })
@@ -36,20 +21,16 @@ function coverPage(teddies) {
 }
 
 function cartfiller(teddy) {
-    const elt = document.getElementById('modelcart');
-    
+    const elt = document.getElementById('modelcart');    
     const dupNode = document.importNode(elt.content,true);
-    console.log(teddy);
-    
     dupNode.getElementById('cartimg').src= teddy.imageUrl;
     dupNode.getElementById("cartname").textContent= teddy.name;
     dupNode.getElementById("cartprice").textContent= teddy.price/100+"€";
     dupNode.getElementById("cartquantity").value= localStorage.getItem(teddy._id);
     dupNode.getElementById("carttotal").textContent= (teddy.price/100)*parseInt(localStorage.getItem(teddy._id))+"€"
     document.getElementById("cartbody").appendChild(dupNode);
-    }
-  
-
+}
+//Permet la programmation des boutons supprimer du panier
 function removefromcart()
 {
 let btn_del = document.querySelectorAll(".btn-danger");
@@ -66,23 +47,23 @@ for (let i = 0 ; i< btn_del.length ;i++)
     })
 }
 }
+//Permet de modifier le prix de la ligne à la modification de la quantité
 function refreshquantity()
 {
 let quantityinput = document.querySelectorAll(".quantityinput");
-let cartprice = document.querySelectorAll(".prices");
-let carttotal = document.querySelectorAll(".totalprice");
+let productsprices = document.querySelectorAll(".prices");
+let producttotal = document.querySelectorAll(".totalprice");
 for (let i = 0 ; i< quantityinput.length ;i++)
 {
     quantityinput[i].addEventListener("change",function(){
         let id_produit = localStorage.key(i);
         localStorage.setItem(id_produit,quantityinput[i].value);
-        carttotal[i].textContent = parseInt(cartprice[i].textContent) * quantityinput[i].value+ "€" ; 
-        refreshfinalprice();
-        
+        producttotal[i].textContent = parseInt(productsprices[i].textContent) * quantityinput[i].value+ "€" ; 
+        refreshfinalprice(); 
     })
 }
 }
-
+//Permet d'actualiser le prix total du panier
 function refreshfinalprice()
 {
     let finalprice = 0;
@@ -95,7 +76,7 @@ function refreshfinalprice()
 }
 
 //*********************** ENVOI FORMULAIRE 
-
+//Crée un objet contact avec les champs du formulaire
 function createcontact()
 {
     const contact = 
@@ -108,7 +89,7 @@ function createcontact()
     }
     return contact
 }
-
+//Crée une liste products avec les données du localstorage
 function createproducts()
 {
 
@@ -137,7 +118,7 @@ function addressIsValid(value) {
     const regex = /^([0-9]{1,})[^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{3,}$/;
     return regex.test(value);
 }
-
+//Passe en test tous les champs du formulaires
 function validationform()
 {
     let formisvalid= true;
@@ -204,19 +185,6 @@ myForm.addEventListener('submit', function(e) {
     }
     if(validationform())
     {
-        fetch("http://localhost:3000/api/teddies/order", {
-        method : "POST",
-        body :  JSON.stringify(order),
-        headers : {
-            "Content-Type": "application/json",
-        }
-      })
-    .then((response) => response.json())
-    .then((json) => {
-      document.location.href="confirmation.html?"+json.orderId;
-    })
-    .catch(() => {
-      alert(error)
-    })
+        postOrder(order);
     }
 })

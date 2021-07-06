@@ -1,4 +1,4 @@
-const orderid= window.location.search.substring(1);
+const orderid=window.location.search.substring(1);
 
 async function init() {
     const teddies = await getTeddies();
@@ -8,20 +8,7 @@ async function init() {
   }
 
 init();
-
-async function getTeddies (){
-return fetch("http://localhost:3000/api/teddies")
-.then(function(res) {
-    if (res.ok) {
-    return res.json();
-    }
-})
-.then((teddies)=>teddies)
-.catch(function(err) {
-    // Une erreur est survenue
-});
-}
-
+//Permet d'afficher le prix final de la commande
 async function showfinalprice(teddies)
 {
     let finalprice = 0;
@@ -37,7 +24,7 @@ async function showfinalprice(teddies)
     })
     document.getElementById("priceconfirmation").innerText= finalprice/100+"€";
 }
-
+// Permet d'afficher le numéro de commande
 async function showorderid(orderid)
 {
     document.getElementById("idconfirmation").textContent = orderid ;

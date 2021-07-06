@@ -8,6 +8,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css" />
+    <script src="js/constante.js"></script>
+    <script src="js/teddies.js"></script>
     <script src="js/product.js" defer ></script>
     <title>Orinoco</title>
   </head>
@@ -50,15 +52,15 @@
               <h6 id="priceTeddy" class="card-subtitle mb-2 text-muted">39€</h6>
               <p id="descriptionTeddy" class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
               <h5>Couleurs : </h5>
-              <div class="row d-flex justify-content-between" id="colors">
-              </div>
+              <select class="row d-flex justify-content-between" id="colors">
+              </select>
               <a id="btnTeddy" href="#" class="btn btn-primary mt-3">Ajouter au panier</a>
             </div>
           </div>
         </div>
       </template>
       <template id="colorsmodel">
-        <div id="colordiv" class="col colors-size"></div>
+        <option id="colordiv" class="col colors-size"></option>
       </template>
     </main>
     

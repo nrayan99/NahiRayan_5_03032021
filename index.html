@@ -9,7 +9,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css" />
     <title>Orinoco</title>
-    <script src='js/index.js'></script>
+    <script src="js/constante.js"></script>
+    <script src="js/teddies.js"></script>
+    <script src='js/index.js' defer></script>
   </head>
 
   <body>
@@ -40,13 +42,16 @@
     <template id='covermodel'>
         <div class="col">
           <div class="card">
-            <img id ="imgTeddy" src="images/teddy_1.jpg" width="400" height="300" class="card-img-top img" alt="Orinoco Teddy">
-            <div class="card-body">
-              <h5 id="nameTeddy" class="card-title">Card title</h5>
-              <h6 id="priceTeddy" class="card-subtitle mb-2 text-muted">39€</h6>
-              <p id="descriptionTeddy" class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-              <a id="btnTeddy" href="#" class="btn btn-primary">Voir le produit</a>
-            </div>
+              <a id="teddyCard" href="">
+              <img id ="imgTeddy" src="images/teddy_1.jpg" width="400" height="300" class="card-img-top img" alt="Orinoco Teddy">
+              <div class="card-body">
+                <h5 id="nameTeddy" class="card-title">Card title</h5>
+                <h6 id="priceTeddy" class="card-subtitle mb-2 text-muted">39€</h6>
+                <p id="descriptionTeddy" class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                <a id="btnTeddy" href="#" class="btn btn-primary">Voir le produit</a>
+                <a href="#" class="btn btn-primary AddToCartBtn">Ajouter au panier</a>
+              </div>
+            </a>
           </div>
         </div>
     </template> 

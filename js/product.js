@@ -1,40 +1,16 @@
-const idteddy= window.location.search.substring(1);
+const idteddy = window.location.search.substring(1);
 async function init() {
-    const teddies = await getTeddies();
-    coverPage(teddies);
-    document.getElementById("btnTeddy").addEventListener("click",addtocart);
+    const teddy = await getTeddy();
+    showTeddy(teddy);
+    addtocart()
+    console.log(URL);
   }
 
 init();
 
-async function getTeddies (){
-return fetch("http://localhost:3000/api/teddies")
-.then(function(res) {
-    if (res.ok) {
-    return res.json();
-    }
-})
-.then((teddies)=>teddies)
-.catch(function(err) {
-    // Une erreur est survenue
-});
-}
-
-function coverPage(teddies) {
-    teddies.forEach((teddy) => {
-      if (teddy._id==idteddy)
-      {
-          console.log(teddy)
-          showTeddy(teddy)
-      }
-    })
-}
-
 function showTeddy(teddy) {
     const elt = document.getElementById('productsmodel');
-    
     const dupNode = document.importNode(elt.content,true);
-    
     dupNode.getElementById('imgTeddy').src= teddy.imageUrl;
     dupNode.getElementById("nameTeddy").textContent= teddy.name;
     dupNode.getElementById("priceTeddy").textContent= teddy.price/100+"€";
@@ -43,33 +19,25 @@ function showTeddy(teddy) {
     document.getElementById("productteddies").appendChild(dupNode);
     console.log(teddy.colors);
     teddy.colors.forEach((color) => {
-        if(color=="Pale brown")
-        {
-            color="#cb7e49"
-        }
-        if(color=="Dark brown")
-        {
-            color="#3f2412"
-        }
-        
-        console.log(color);
-    
-        console.log(dupNode);
         const colors = document.getElementById('colorsmodel');
         const dupColors = document.importNode(colors.content,true);
-        dupColors.getElementById("colordiv").style.background=color;
+        dupColors.getElementById("colordiv").textContent=color;
         document.getElementById("colors").appendChild(dupColors);
     })
   }
   
   function addtocart(){
-    if (localStorage.getItem(idteddy))
-    {
-        let nbitem= parseInt(localStorage.getItem(idteddy),10) +1
-        localStorage.setItem(idteddy,nbitem);
-    } 
-    else
-    {
-        localStorage.setItem(idteddy,1);
-    }
+    document.getElementById("btnTeddy").addEventListener("click",function(e){
+        e.preventDefault()
+        if (localStorage.getItem(idteddy))
+        {
+            let nbitem= parseInt(localStorage.getItem(idteddy),10) +1
+            localStorage.setItem(idteddy,nbitem);
+        } 
+        else
+        {
+            localStorage.setItem(idteddy,1);
+        }
+        alert("Votre article a été ajouté au panier")
+    });
 }
