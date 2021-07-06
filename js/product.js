@@ -1,8 +1,8 @@
-const idteddy = window.location.search.substring(1);
+const idteddy = window.location.search.substring(1); 
 async function init() {
     const teddy = await getTeddy();
     showTeddy(teddy);
-    addtocart()
+    addtoCart()
   }
 
 init();
@@ -14,7 +14,6 @@ function showTeddy(teddy) {
     dupNode.getElementById("nameTeddy").textContent= teddy.name;
     dupNode.getElementById("priceTeddy").textContent= teddy.price/100+"€";
     dupNode.getElementById("descriptionTeddy").textContent= teddy.description;
-    dupNode.getElementById("btnTeddy").href= "cart.html?"+teddy._id;
     document.getElementById("productteddies").appendChild(dupNode);
     teddy.colors.forEach((color) => {
         const colors = document.getElementById('colorsmodel');
@@ -24,17 +23,17 @@ function showTeddy(teddy) {
     })
   }
   
-  function addtocart(){
+  function addtoCart(){
     document.getElementById("btnTeddy").addEventListener("click",function(e){
         e.preventDefault()
-        if (localStorage.getItem(idteddy))
+        if (localStorage.getItem(idteddy)) // test si l'élément a déja une quantité dans localstorage 
         {
-            let nbitem= parseInt(localStorage.getItem(idteddy),10) +1
+            let nbitem= parseInt(localStorage.getItem(idteddy),10) +1 //Si oui ajouter 1 à la quantité
             localStorage.setItem(idteddy,nbitem);
         } 
-        else
+        else 
         {
-            localStorage.setItem(idteddy,1);
+            localStorage.setItem(idteddy,1);// Si non lui donner la quantité "1"
         }
         alert("Votre article a été ajouté au panier")
     });

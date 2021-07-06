@@ -25,7 +25,7 @@ return fetch(URL+idteddy)
 });
 }
 //METHODE POST
-function postOrder(order){
+async function postOrder(order){
     return fetch(URL+"order", {
         method : "POST",
         body :  JSON.stringify(order),
