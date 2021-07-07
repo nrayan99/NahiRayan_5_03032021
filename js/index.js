@@ -1,7 +1,7 @@
 async function init() {
   const teddies = await getTeddies();
   coverPage(teddies);
-  addtoCart(teddies)
+  addtoCart(teddies);
 }
 init();
 function coverPage(teddies) {
@@ -19,7 +19,7 @@ function coverPage(teddies) {
     dupNode.getElementById("descriptionTeddy").textContent= teddy.description;
     dupNode.getElementById("btnTeddy").href= "products.html?"+teddy._id;
     dupNode.getElementById('teddyCard').href="products.html?"+teddy._id;
-    document.getElementById("teddies").appendChild(dupNode);
+    document.getElementById("teddies").appendChild(dupNode); //On ajoute enfin la template au code 
     
   }
   // Programmation des boutons ajouter au panier
@@ -32,7 +32,7 @@ function coverPage(teddies) {
       btn_add[i].addEventListener("click",function(e){
         e.preventDefault();
        
-        if(localStorage.getItem(teddies[i]._id)>=1)
+        if(localStorage.getItem(teddies[i]._id))
         {
           let nb_teddy = localStorage.getItem(teddies[i]._id)
           nb_teddy = parseInt(nb_teddy) +1
