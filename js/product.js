@@ -1,6 +1,6 @@
 const idteddy = window.location.search.substring(1); 
 async function init() {
-    const teddy = await getTeddy();
+    const teddy = await getTeddy(idteddy);
     showTeddy(teddy);
     addtoCart()
   }

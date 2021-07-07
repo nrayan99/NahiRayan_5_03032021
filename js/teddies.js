@@ -12,7 +12,7 @@ async function getTeddies (){
     });
   }
 //METHODE GET BY ID
-async function getTeddy (){
+async function getTeddy(idteddy){
 return fetch(URL+idteddy)
 .then(function(res) {
     if (res.ok) {
