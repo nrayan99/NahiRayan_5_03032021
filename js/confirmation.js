@@ -9,7 +9,7 @@ async function init() {
 
 init();
 //Permet d'afficher le prix final de la commande
-async function showfinalprice(teddies)
+function showfinalprice(teddies)
 {
     let finalprice = 0;
     teddies.forEach((teddy) => {
@@ -25,7 +25,7 @@ async function showfinalprice(teddies)
     document.getElementById("priceconfirmation").innerText= finalprice/100+"€";
 }
 // Permet d'afficher le numéro de commande
-async function showorderid(orderid)
+function showorderid(orderid)
 {
     document.getElementById("idconfirmation").textContent = orderid ;
 }
