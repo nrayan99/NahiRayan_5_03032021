@@ -182,8 +182,12 @@ myForm.addEventListener('submit', function(e) {
         ,
         products : createproducts(),
     }
-    if(validationform())
+    if(validationform()&& localStorage.length>0)
     {
         postOrder(order);
+    }
+    if(validationform()&&localStorage.length==0)
+    {
+        alert("Votre panier est vide");
     }
 })
