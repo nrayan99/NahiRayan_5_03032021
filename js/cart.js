@@ -3,8 +3,10 @@ async function init() {
     const teddies = await getTeddies();
     coverPage(teddies);
     refreshfinalprice();
-    removefromcart();
-    refreshquantity();
+    const newTeddies = teddiesOnCart(teddies);
+    console.log(newTeddies);
+    removefromcart(newTeddies);
+    refreshquantity(newTeddies);
   }
 
 init();
@@ -31,13 +33,13 @@ function cartfiller(teddy) {
     document.getElementById("cartbody").appendChild(dupNode);
 }
 //Permet la programmation des boutons supprimer du panier
-function removefromcart()
+function removefromcart(teddies)
 {
 let btn_del = document.querySelectorAll(".btn-danger");
 let cartlines = document.querySelectorAll(".cartline");
 for (let i = 0 ; i< btn_del.length ;i++)
 {
-    let id_produit = localStorage.key(i);
+    let id_produit = teddies[i]._id;
     btn_del[i].addEventListener("click",function(){
         
         localStorage.removeItem(id_produit);
@@ -47,7 +49,7 @@ for (let i = 0 ; i< btn_del.length ;i++)
 }
 }
 //Permet de modifier le prix de la ligne à la modification de la quantité
-function refreshquantity()
+function refreshquantity(teddies)
 {
 let quantityinput = document.querySelectorAll(".quantityinput");
 let productsprices = document.querySelectorAll(".prices");
@@ -55,7 +57,7 @@ let producttotal = document.querySelectorAll(".totalprice");
 for (let i = 0 ; i< quantityinput.length ;i++)
 {
     quantityinput[i].addEventListener("change",function(){
-        let id_produit = localStorage.key(i);
+        let id_produit = teddies[i]._id;
         localStorage.setItem(id_produit,quantityinput[i].value);
         producttotal[i].textContent = parseInt(productsprices[i].textContent) * quantityinput[i].value+ "€" ; 
         refreshfinalprice(); 
@@ -191,3 +193,18 @@ myForm.addEventListener('submit', function(e) {
         alert("Votre panier est vide");
     }
 })
+
+
+function teddiesOnCart(teddies){
+    let teddiesOnCart = []
+    for (var i = 0; i < localStorage.length; i++) {
+        
+        teddies.forEach((teddy) => {
+            if ((localStorage.key(i))==teddy._id)
+            {
+                teddiesOnCart.push(teddy);
+            }
+        })
+    }
+    return teddiesOnCart;
+}
