@@ -4,7 +4,6 @@ async function init() {
     coverPage(teddies);
     refreshfinalprice();
     const newTeddies = teddiesOnCart(teddies);
-    console.log(newTeddies);
     removefromcart(newTeddies);
     refreshquantity(newTeddies);
   }
